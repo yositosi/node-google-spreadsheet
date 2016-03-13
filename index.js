@@ -116,9 +116,9 @@ var GooogleSpreadsheet = function( ss_key, auth_id, options ){
         if ( method == 'POST' || method == 'PUT' ){
           headers['content-type'] = 'application/atom+xml';
         }
-        if ( method == 'PUT' ){
+        if (method == 'PUT' || method == 'POST' && query_or_data.includes('http://schemas.google.com/gdata/batch') ) {
           headers['If-Match'] = '*';
-        } 
+        }
 
         if ( method == 'GET' && query_or_data ) {
           url += "?" + querystring.stringify( query_or_data );
@@ -473,6 +473,3 @@ var xmlSafeColumnName = function(val){
   return String(val).replace(/[\s_]+/g, '')
       .toLowerCase();
 }
-
-
-
